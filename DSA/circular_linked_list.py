@@ -1,122 +1,3 @@
-
-'''''
-class CLL:
-    def __init__(self, head = None):
-        self.head = head
-
-    def is_empty(self):
-        return self.head == None
-
-    def add_to_head(self, item):
-        n = Node(item, self.head)
-        if self.head is None:
-            n.next = n
-            self.head = n
-        else:
-            temp = self.head
-            while temp.next is not self.head:
-                temp = temp.next
-
-            temp.next = n
-            self.head = n
-
-    def add_to_tail(self, item):
-        n = Node(item, self.head)
-        if self.head is None:
-            n.next = n
-            self.head = n
-        else:
-            temp = self.head
-            while temp.next is not self.head:
-                temp = temp.next
-
-            temp.next = n
-
-    def search_item_in_CLL(self, item):
-        if self.is_empty():
-            return
-        
-        temp = self.head
-        while temp is not None:
-            if item == temp.item:
-                print(temp.item, " is Found in CLL")
-                return temp
-            temp = temp.next
-             
-            if temp == self.head:
-                break
-
-        print(item, " is not in CLL")
-        return None
-
-
-    def add_in_between(self, node, item):
-        if self.is_empty():
-            return
- 
-        temp = self.head
-        while True:
-            if temp.item == node:
-                n = Node(item, temp.next)
-                temp.next = n
-
-            temp = temp.next
-
-            if temp == self.head:
-                break
-
-    def print_CLL(self):
-        if self.is_empty():
-            print()
-            return
-        
-        temp = self.head
-        while True:
-            print(temp.item, end=" ")
-            temp = temp.next
-            if temp == self.head:
-                break
-
-        print()
-
-    def delete_first_node(self):
-        if self.is_empty():
-            return
-        if self.head.next == self.head:
-            self.head = None
-            return
-    
-        temp = self.head
-        while temp.next is not self.head:
-            temp = temp.next
-
-        temp.next = self.head.next
-        self.head = self.head.next                
-
-    def delete_last_elt(self):
-        if self.is_empty():
-            return
-        if self.head.next == self.head:
-            self.head = None
-            return
-
-        temp = self.head
-        while temp.next.next != self.head:
-            temp = temp.next
-
-        temp.next = self.head'''
-
-'''''
-    def add_to_tail(self, item):
-        n = Node(item, self.last)
-        if self.is_empty():
-            self.last = n
-            n.next = self.last
-        else:
-            self.last.next = n
-            n.next = self.last'''
-
-
 class Node:
     def __init__(self, item = None, next = None):
         self.item = item
@@ -135,8 +16,8 @@ class CLL:
             self.last = n
             n.next = n
             return
-        head = self.last.next
-        n.next = head
+
+        n.next = self.last.next
         self.last.next = n
         return
     
@@ -146,9 +27,9 @@ class CLL:
             self.last = n
             n.next = n
             return
-        head = self.last.next
+
+        n.next = self.last.next
         self.last.next = n
-        n.next = head
         self.last = n
         return
     
@@ -157,7 +38,6 @@ class CLL:
             return None
         
         temp = self.last.next
-        print(temp.item)
         while True:
             if temp.item == item:
                 print(temp.item, "is found in cll")
@@ -172,25 +52,12 @@ class CLL:
         return None
 
     def insert_after(self, node, item):
-        if self.last is None:
-            raise ValueError("List is Empty")
-        temp = self.last.next
-        while True:
-            if temp is node:
-                n = Node(item)
-                n.next = temp.next
-                temp.next = n
-
-                if self.last is temp:
-                    self.last = n
-
-                return
-            
-            if temp is self.last:
-                break
-
-            temp = temp.next
-
+        if node is not None:
+            n = Node(item, node.next)
+            node.next = n
+            if node == self.last:
+                self.last = n
+ 
     def delete_first_node(self):
         if self.is_empty():
             return
@@ -274,61 +141,59 @@ class CLLIerator:
 
 # Testing circular linked list
 myList = CLL()
-# myList.delete_last_node()
-# myList.print_CLL()
-# myList.delete_first_node()
-# myList.print_CLL
-# myList.delete_last_node()
-# myList.print_CLL()
-# myList.add_to_head(10)
-# myList.print_CLL()
-# myList.delete_last_node()
-# myList.print_CLL()
-# myList.add_to_head(20)
-# myList.print_CLL()
-# myList.delete_last_node()
-# myList.print_CLL()
-# myList.add_to_head(30)
-# myList.print_CLL()
-# myList.add_to_head(40)
-# myList.print_CLL()
-# myList.delete_last_node()
-# myList.print_CLL()
-# myList.add_to_tail(50)
-# myList.print_CLL()
-# myList.add_to_tail(60)
-# myList.print_CLL()
-# myList.delete_last_node()
-# myList.print_CLL()
-# myList.delete_first_node()
-# myList.print_CLL()
-# myList.search_item_in_cll(10)
-# myList.search_item_in_cll(60)
-# myList.insert_after(myList.search_item_in_cll(10), 50)
-# myList.print_CLL()
-# # myList.delete_last_node()
-# # myList.print_CLL()
-# myList.print_CLL()
-# myList.delete_first_node()
-# myList.print_CLL()
-# myList.add_to_head(40)
-# myList.add_to_tail(50)
-# myList.print_CLL()
-# myList.add_to_tail(60)
-# myList.print_CLL()
-# myList.add_in_between(20, 45)
-# myList.print_CLL()
-# myList.add_to_head(35)
-# myList.print_CLL()
-# myList.add_in_between(35, 65)
-# myList.print_CLL()
-# # myList.search_item_in_CLL(60)
-# myList.add_to_tail(60)
-# # myList.print_CLL()
-# # myList.delete_first_node()
-# # myList.print_CLL()
-# # myList.delete_last_elt()
-# myList.print_CLL()
+myList.delete_last_node()
+myList.print_CLL()
+myList.delete_first_node()
+myList.print_CLL
+myList.delete_last_node()
+myList.print_CLL()
+myList.add_to_head(10)
+myList.print_CLL()
+myList.delete_last_node()
+myList.print_CLL()
+myList.add_to_head(20)
+myList.print_CLL()
+myList.delete_last_node()
+myList.print_CLL()
+myList.add_to_head(30)
+myList.print_CLL()
+myList.add_to_head(40)
+myList.print_CLL()
+myList.delete_last_node()
+myList.print_CLL()
+myList.add_to_tail(50)
+myList.print_CLL()
+myList.add_to_tail(60)
+myList.print_CLL()
+myList.delete_last_node()
+myList.print_CLL()
+myList.delete_first_node()
+myList.print_CLL()
+myList.search_item_in_cll(10)
+myList.search_item_in_cll(60)
+myList.insert_after(myList.search_item_in_cll(10), 50)
+myList.print_CLL()
+myList.delete_last_node()
+myList.print_CLL()
+myList.print_CLL()
+myList.delete_first_node()
+myList.print_CLL()
+myList.add_to_head(40)
+myList.add_to_tail(50)
+myList.print_CLL()
+myList.add_to_tail(60)
+myList.print_CLL()
+myList.insert_after(myList.search_item_in_cll(60), 65)
+myList.print_CLL()
+myList.add_to_head(35)
+myList.print_CLL()
+myList.search_item_in_cll(60)
+myList.add_to_tail(70)
+myList.print_CLL()
+myList.insert_after(myList.search_item_in_cll(70), 75)
+myList.print_CLL()
+myList.delete_first_node()
+myList.print_CLL()
 
 #########Delete node testing##########
 myList.delete_node(12)
