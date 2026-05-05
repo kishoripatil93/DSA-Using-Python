@@ -23,7 +23,6 @@ class Queue:
     def dequeue(self):
         if self.is_empty():
             return
-        if 
 
         temp = self.front.data
         self.front = self.front.next
