@@ -76,9 +76,41 @@ class BST:
         result = []
         self.r_postorder(self.root, result)
         return result
+    
+    def size(self):
+        return len(self.inorder())
+            
+    def min_val(self, temp ):
+        current = temp
+        while current.left is not None:
+            current = current.left       
+        return current.item   
+    
+    def max_val(self):
+        current = self.root
+        while current.right is not None:
+            current = current.right       
+        return current.item   
+    
+    def r_delete(self, root, data):
+        if root is None:
+            return root
+        if data  <  root.item:
+            root.left = self.r_delete(root.left, data)
+        elif data > root.item:
+            root.right = self.r_delete(root.right, data)
+        else:
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            root.item = self.min_val(root.right)
+            self.r_delete(root.right, root.item)
+        return root
 
-
-
+    
+    def delete(self, data):
+        self.root = self.r_delete(self.root, data)
 
 b1 = BST()
 b1.insert(50)
@@ -109,10 +141,12 @@ for i in nodes:
     print(i, end=" ")
 print()
 
-
-
-
-            
-
-            
-
+print("min value is", b1.min_val(b1.root))
+print("max value is", b1.max_val())
+print("max value is", b1.delete(60))
+print("Tree nodes in inorder are as following")
+nodes = b1.inorder()
+for i in nodes:
+    print(i, end=" ")
+print()
+print("size is", b1.size())
